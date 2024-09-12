@@ -46,76 +46,79 @@ class _HomeScreenState extends State<HomeScreen> {
         SizedBox(
           height: mediaQuery.height * 0.04,
         ),
-        Center(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(
-              decoration: BoxDecoration(
-                  color: provider.isDarkTheme
-                      ? Colors.white.withOpacity(0.04)
-                      : Colors.black.withOpacity(0.04),
-                  borderRadius: BorderRadius.circular(20)),
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: Row(mainAxisSize: MainAxisSize.min, children: [
-                const Text(
-                  "Wasib Zameer",
-                  style: TextStyle(
-                      fontFamily: "Inter",
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 0.7),
-                ),
-                SizedBox(
-                  width: mediaQuery.width * 0.37,
-                ),
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Scrollable.ensureVisible(
-                          featuredProjectsKey.currentContext!,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.easeInOut,
-                        );
-                      },
-                      child: const Text(
-                        "Projects",
-                        style: TextStyle(fontFamily: "Fira Code", fontSize: 18),
+        Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          Center(
+            child: Container(
+                decoration: BoxDecoration(
+                    color: provider.isDarkTheme
+                        ? Colors.white.withOpacity(0.2)
+                        : Colors.black.withOpacity(0.04),
+                    borderRadius: BorderRadius.circular(20)),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                child: Row(mainAxisSize: MainAxisSize.min, children: [
+                  const Text(
+                    "Wasib Zameer",
+                    style: TextStyle(
+                        fontFamily: "Inter",
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.7),
+                  ),
+                  SizedBox(
+                    width: mediaQuery.width * 0.37,
+                  ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Scrollable.ensureVisible(
+                            featuredProjectsKey.currentContext!,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                        child: const Text(
+                          "Projects",
+                          style:
+                              TextStyle(fontFamily: "Fira Code", fontSize: 18),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: mediaQuery.width * 0.01,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Scrollable.ensureVisible(
-                          aboutMeKey.currentContext!,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.easeInOut,
-                        );
-                      },
-                      child: const Text(
-                        "About Me",
-                        style: TextStyle(fontFamily: "Fira Code", fontSize: 18),
+                      SizedBox(
+                        width: mediaQuery.width * 0.01,
                       ),
-                    ),
-                    SizedBox(
-                      width: mediaQuery.width * 0.01,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        provider.changeTheme();
-                      },
-                      child: Icon(
-                        provider.isDarkTheme
-                            ? Icons.light_mode
-                            : Icons.light_mode_outlined,
-                        size: 25,
+                      GestureDetector(
+                        onTap: () {
+                          Scrollable.ensureVisible(
+                            aboutMeKey.currentContext!,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                        child: const Text(
+                          "About Me",
+                          style:
+                              TextStyle(fontFamily: "Fira Code", fontSize: 18),
+                        ),
                       ),
-                    )
-                  ],
-                )
-              ])),
+                      SizedBox(
+                        width: mediaQuery.width * 0.01,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          provider.changeTheme();
+                        },
+                        child: Icon(
+                          provider.isDarkTheme
+                              ? Icons.light_mode
+                              : Icons.light_mode_outlined,
+                          size: 25,
+                        ),
+                      )
+                    ],
+                  )
+                ])),
+          ),
           SizedBox(
             height: mediaQuery.height * 0.18,
           ),
@@ -126,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Text(
             "I design and develop \nimpactful mobile applications.",
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 60,
                 fontFamily: "Inter",
@@ -164,16 +168,8 @@ class _HomeScreenState extends State<HomeScreen> {
           Column(
             children: [
               SizedBox(
-                key: aboutMeKey,
-                child: const Text(
-                  "HARDSKILLS",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontFamily: "Inter",
-                      fontSize: 16,
-                      letterSpacing: 0.7),
-                ),
-              ),
+                  key: aboutMeKey,
+                  height: mediaQuery.height * 0.05), //for spacing
               SizedBox(
                 height: mediaQuery.height * 0.01,
               ),
@@ -303,15 +299,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ]),
               ))
-        ])),
+        ]),
         SizedBox(height: mediaQuery.height * 0.5),
         SizedBox(
-          key: featuredProjectsKey,
-          child: const Text(
-            "Featured Projects",
-            style: TextStyle(
-                fontWeight: FontWeight.w900, fontSize: 55, fontFamily: "Inter"),
-          ),
+            key: featuredProjectsKey,
+            height: mediaQuery.height * 0.05), //for spacing
+        const Text(
+          "Featured Projects",
+          style: TextStyle(
+              fontWeight: FontWeight.w900, fontSize: 55, fontFamily: "Inter"),
         ),
         SizedBox(
           height: mediaQuery.height * 0.01,
