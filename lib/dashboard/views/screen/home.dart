@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portfolio_site/core/custom_animated_button.dart';
+import 'package:portfolio_site/dashboard/views/screen/contact_me.dart';
+import 'package:portfolio_site/dashboard/views/screen/featured_projects.dart';
 import 'package:portfolio_site/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -146,22 +148,23 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: mediaQuery.height * 0.02,
           ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              AnimatedButton(
-                text: "Contact Me",
-                onTap: () => _linkedin(),
-              ),
-              SizedBox(
-                width: mediaQuery.width * 0.01,
-              ),
-              AnimatedButton(
-                text: "LinkedIn",
-                onTap: () => _linkedin(),
-              ),
-            ],
-          ),
+          const ContactMe(),
+          // Row(
+          //   mainAxisSize: MainAxisSize.min,
+          //   children: [
+          //     AnimatedButton(
+          //       text: "Contact Me",
+          //       onTap: () => _linkedin(),
+          //     ),
+          //     SizedBox(
+          //       width: mediaQuery.width * 0.01,
+          //     ),
+          //     AnimatedButton(
+          //       text: "LinkedIn",
+          //       onTap: () => _linkedin(),
+          //     ),
+          //   ],
+          // ),
           SizedBox(
             height: mediaQuery.height * 0.4,
           ),
@@ -321,154 +324,23 @@ class _HomeScreenState extends State<HomeScreen> {
               fontFamily: "Fira Code"),
         ),
         SizedBox(height: mediaQuery.height * 0.02),
-        Column(
-          children: [
-            buildProjectContainer(
-                provider: provider,
-                imageUrl: "assets/images/hey_smarty.png",
-                mediaQuery: mediaQuery,
-                projectName: "HeySmarty",
-                privicyStatus: "public",
-                description:
-                    "Developed HeySmarty, an AI-powered mobile app for intelligent query responses, featuring speech-to-text, voice-to-voice, dark/light themes, and font resizing. Integrated secure logins with Google, Apple, and custom sign-ins. Enabled chat categorization, local saving, and custom folder creation. Fine-tuned ChatGPT with business data for tailored responses and optimized performance."),
-            SizedBox(height: mediaQuery.height * 0.02),
-            buildProjectContainer(
-                provider: provider,
-                imageUrl: "assets/images/nutriwest.png",
-                mediaQuery: mediaQuery,
-                projectName: "Nutri-west",
-                privicyStatus: "public",
-                description:
-                    "Developed a mobile app for NutriWest with comprehensive features. Users can navigate and search for products by category, ingredient, or health condition. Implemented an intuitive 'Add to Cart' functionality, push notifications, and optimized heavy images for performance. Created an iOS version for consistent cross-platform experience. Deployed on Play Store and Apple Store. "),
-          ],
-        ),
+        const FeaturedProjects(),
         SizedBox(height: mediaQuery.height * 0.3),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
+        Container(
+            width: mediaQuery.width,
+            height: mediaQuery.height * 0.2,
+            color: provider.isDarkTheme
+                ? Colors.white.withOpacity(0.2)
+                : Colors.black.withOpacity(0.1),
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "ACKNOWLEDGMENTS",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )
+                Text("Made with ❤ in Flutter", style: TextStyle(fontSize: 20, fontFamily: "Inter", fontWeight: FontWeight.bold),),
+                Text("Designed & Built by Wasib Zameer.", style: TextStyle(fontSize: 16, fontFamily: "Inter", fontWeight: FontWeight.bold),),
               ],
-            )
-          ],
-        )
+            ))
       ]);
     }))));
-  }
-
-  Container buildProjectContainer(
-      {required Size mediaQuery,
-      required String projectName,
-      required ThemeProvider provider,
-      imageUrl,
-      privicyStatus,
-      description}) {
-    return Container(
-      // width: mediaQuery.width * 0.56,
-      decoration: BoxDecoration(
-          border: Border.all(
-              color: provider.isDarkTheme ? Colors.white : Colors.black),
-          color: Colors.black.withOpacity(0.05),
-          borderRadius: const BorderRadius.all(Radius.circular(20))),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      projectName,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontFamily: "Inter",
-                        fontSize: 15,
-                      ),
-                    ),
-                    const SizedBox(width: 15),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 15),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadiusDirectional.circular(20)),
-                      child: Row(
-                        children: [
-                          Image.network(
-                            "https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png",
-                            width: 20,
-                            height: 20,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            privicyStatus,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontFamily: "Inter"),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: mediaQuery.height * 0.04),
-                SizedBox(
-                  width: mediaQuery.width * 0.3,
-                  child: Text(
-                    description,
-                    style: const TextStyle(fontFamily: "Inter"),
-                  ),
-                ),
-                SizedBox(height: mediaQuery.height * 0.05),
-                Row(
-                  children: [
-                    buildSkillContainer(title: "Flutter"),
-                    SizedBox(width: mediaQuery.width * 0.003),
-                    buildSkillContainer(title: "Dart"),
-                    SizedBox(width: mediaQuery.width * 0.003),
-                    buildSkillContainer(title: "Android"),
-                    SizedBox(width: mediaQuery.width * 0.003),
-                  ],
-                ),
-                SizedBox(height: mediaQuery.height * 0.01),
-                Row(
-                  children: [
-                    buildSkillContainer(title: "iOS"),
-                    SizedBox(width: mediaQuery.width * 0.003),
-                    buildSkillContainer(title: "MySQL"),
-                    SizedBox(width: mediaQuery.width * 0.003),
-                    buildSkillContainer(title: "Design"),
-                    SizedBox(width: mediaQuery.width * 0.003),
-                  ],
-                ),
-                SizedBox(height: mediaQuery.height * 0.02),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 15.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                imageUrl,
-                width: 300,
-                height: 300,
-                fit: BoxFit.cover,
-              ),
-            ),
-          )
-        ],
-      ),
-    );
   }
 
   Container buildSkillContainer({String? title}) {
