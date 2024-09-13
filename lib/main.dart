@@ -29,22 +29,21 @@ class _MyAppState extends State<MyApp> {
   }
 
   setval() async {
-    ThemeProvider().isDarkTheme = await LocalDataSource().getThemeValue();
-    setState(() {});
-  }
+  bool isDark = await LocalDataSource.getThemeValue();
+  Provider.of<ThemeProvider>(context, listen: false).isDarkTheme = isDark;
+}
+
 
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
       builder: (context, provider, child) {
-        // print("========>>$themeVal");
-        // provider.isDarkTheme = themeVal!;
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: provider.isDarkTheme
               ? AppTheme().darkTheme
               : AppTheme().lightTheme,
-          home: HomeScreen(),
+          home: const HomeScreen(),
         );
       },
     );
